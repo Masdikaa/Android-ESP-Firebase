@@ -32,12 +32,16 @@ class MainActivity : AppCompatActivity() {
                 val objectTemp = snapshot.child("MLX90614").child("object_temp").getValue()
                 val gpsLat = snapshot.child("GPS").child("latitude").getValue()
                 val gpsLng = snapshot.child("GPS").child("longitude").getValue()
+                val heartRate = snapshot.child("MAX30100").child("heart_rate").getValue()
+                val spo2 = snapshot.child("MAX30100").child("spo2").getValue()
 
                 // binding.tvAmbientTemp.text = "Ambient Temperature : ${ambientTemp.toString()}"
                 binding.tvAmbientTemp.text = "Ambient Temperature : ${String.format("%.2f", ambientTemp)}°C"
                 binding.tvObjectTemp.text = "Object Temperature : ${String.format("%.2f", objectTemp)}°C"
                 binding.tvLatitude.text = "Latitude : ${gpsLat.toString()}"
                 binding.tvLongitude.text = "Long : ${gpsLng.toString()}"
+                binding.tvHeartrate.text = "Heart Rate : ${heartRate.toString()} BPM"
+                binding.tvBloodO2.text = "Blood O2 : ${spo2.toString()}%"
 
             }
 
