@@ -53,4 +53,10 @@ dependencies {
     implementation 'com.google.firebase:firebase-analytics-ktx'
     implementation 'com.google.firebase:firebase-auth:22.3.1'
 
+    // MapBox
+    implementation("com.mapbox.maps:android:11.0.0")
+
+    // Animated Bottom Bar
+    implementation 'nl.joery.animatedbottombar:library:1.1.0'
+
 }

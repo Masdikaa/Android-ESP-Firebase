@@ -6,105 +6,87 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
-        android:fontFamily="@font/lato_regular"
-        android:text="Temperature Monitoring"
-        android:textAlignment="center"
-        android:textColor="@color/black"
-        android:textSize="24dp"
-        android:textStyle="bold"
+    <LinearLayout
+        android:id="@+id/top_border"
+        android:layout_width="0dp"
+        android:layout_height="5dp"
+        android:background="@color/dark_gray"
+        android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <RelativeLayout
-        android:id="@+id/relativeLayout"
+    <FrameLayout
+        android:id="@+id/frame_layout"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="30dp"
-        android:layout_marginTop="40dp"
-        android:background="@drawable/layout_background"
-        android:gravity="center_horizontal"
-        android:padding="20dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@id/bottom_bar_top"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/title">
+        app:layout_constraintTop_toBottomOf="@+id/top_border" />
 
-        <TextView
-            android:id="@+id/tv_ambient_temp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/lato_regular"
-            android:text="Ambient Temperature"
-            android:textAlignment="textStart"
-            android:textColor="@color/black"
-            android:textSize="20dp" />
+    <com.mapbox.maps.MapView
+        android:id="@+id/mapView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@id/bottom_bar_top"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/top_border"
+        app:mapbox_cameraBearing="0.0"
+        app:mapbox_cameraPitch="0.0"
+        app:mapbox_cameraTargetLat="-7.63978"
+        app:mapbox_cameraTargetLng="111.54435"
+        app:mapbox_cameraZoom="10"
+        app:mapbox_locationComponentEnabled="true"
+        app:mapbox_locationComponentPuckBearing="heading" />
 
-        <TextView
-            android:id="@+id/tv_object_temp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/tv_ambient_temp"
-            android:layout_marginTop="20dp"
-            android:fontFamily="@font/lato_regular"
-            android:text="Object Temperature"
-            android:textAlignment="textStart"
-            android:textColor="@color/black"
-            android:textSize="20dp" />
+    <LinearLayout
+        android:id="@+id/open_dialog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/top_round"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@id/bottom_bar_top"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
 
-        <TextView
-            android:id="@+id/tv_latitude"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/tv_object_temp"
-            android:layout_marginTop="20dp"
-            android:fontFamily="@font/lato_regular"
-            android:text="Latitude"
-            android:textAlignment="textStart"
-            android:textColor="@color/black"
-            android:textSize="20dp" />
+        <ImageView
+            android:layout_width="60dp"
+            android:layout_height="20dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="5dp"
+            android:rotation="180"
+            android:src="@drawable/arrow_down"
+            tools:ignore="ContentDescription,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
-        <TextView
-            android:id="@+id/tv_longitude"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/tv_latitude"
-            android:layout_marginTop="20dp"
-            android:fontFamily="@font/lato_regular"
-            android:text="Longitude"
-            android:textAlignment="textStart"
-            android:textColor="@color/black"
-            android:textSize="20dp" />
 
-        <TextView
-            android:id="@+id/tv_heartrate"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/tv_longitude"
-            android:layout_marginTop="20dp"
-            android:fontFamily="@font/lato_regular"
-            android:text="Heartrate"
-            android:textAlignment="textStart"
-            android:textColor="@color/black"
-            android:textSize="20dp" />
+    </LinearLayout>
 
-        <TextView
-            android:id="@+id/tv_blood_o2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/tv_heartrate"
-            android:layout_marginTop="20dp"
-            android:fontFamily="@font/lato_regular"
-            android:text="Blood Oxygen"
-            android:textAlignment="textStart"
-            android:textColor="@color/black"
-            android:textSize="20dp" />
+    <nl.joery.animatedbottombar.AnimatedBottomBar
+        android:id="@+id/bottom_bar"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@color/white"
+        app:abb_iconSize="32dp"
+        app:abb_indicatorAppearance="round"
+        app:abb_indicatorHeight="5dp"
+        app:abb_indicatorMargin="50dp"
+        app:abb_selectedIndex="0"
+        app:abb_selectedTabType="icon"
+        app:abb_tabs="@menu/tabs"
+        app:abb_textAppearance="@style/CustomText"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/bottom_bar_top" />
 
-    </RelativeLayout>
-
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/bottom_bar_top"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.93" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
