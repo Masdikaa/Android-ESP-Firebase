@@ -16,5 +16,15 @@
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
     </style>
 
+    <!-- Define Dialog Sheet Bottom Style-->
+    <style name="AppBottomSheetDialogTheme" parent="Theme.Design.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/AppModelStyle</item>
+    </style>
+
+    <style name="AppModelStyle" parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@drawable/dialog_sheet_round</item>
+    </style>
+
+
     <style name="Theme.ESPAndroidFirebase" parent="Base.Theme.ESPAndroidFirebase" />
 </resources>

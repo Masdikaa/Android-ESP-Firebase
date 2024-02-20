@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/top_round"
+    android:orientation="vertical">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="40dp">
+
+        <View
+            android:id="@+id/dot_dialog"
+            android:layout_width="50dp"
+            android:layout_height="5dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="5dp"
+            android:background="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <RelativeLayout
+            android:id="@+id/top_sheet"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/dot_dialog">
+
+            <TextView
+                android:id="@+id/tv_kondisi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:text="Kondisi Tubuh"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/close_button"
+                android:layout_width="20sp"
+                android:layout_height="20sp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="20dp"
+                android:importantForAccessibility="no"
+                android:src="@drawable/close_icon" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/temperature_content"
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/dialog_bg_temperature"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/top_sheet">
+
+            <ImageView
+                android:id="@+id/icon_temperature"
+                android:layout_width="90dp"
+                android:layout_height="90dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginStart="10dp"
+                android:src="@drawable/dialog_temperature_icon" />
+
+            <TextView
+                android:id="@+id/title_temperature"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_toEndOf="@id/icon_temperature"
+                android:fontFamily="@font/gobold"
+                android:text="suhu tubuh"
+                android:textColor="@color/black"
+                android:textSize="24sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/title_temperature"
+                android:layout_alignParentBottom="true"
+                android:layout_marginTop="3dp"
+                android:layout_toEndOf="@id/icon_temperature"
+                android:fontFamily="@font/gobold"
+                android:text="00°C"
+                android:textAlignment="textStart"
+                android:textColor="@color/black"
+                android:textSize="38sp" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/heart_rate_content"
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/dialog_bg_heartbeat"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/temperature_content">
+
+            <ImageView
+                android:id="@+id/icon_heartrate"
+                android:layout_width="90dp"
+                android:layout_height="90dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginStart="10dp"
+                android:src="@drawable/dialog_heart_rate_icon" />
+
+            <TextView
+                android:id="@+id/title_heart_rate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_toEndOf="@id/icon_heartrate"
+                android:fontFamily="@font/gobold"
+                android:text="detak jantung"
+                android:textColor="@color/black"
+                android:textSize="24sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/title_heart_rate"
+                android:layout_alignParentBottom="true"
+                android:layout_marginTop="3dp"
+                android:layout_toEndOf="@id/icon_heartrate"
+                android:fontFamily="@font/gobold"
+                android:text="00 BPM"
+                android:textAlignment="textStart"
+                android:textColor="@color/black"
+                android:textSize="38sp" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/blood_oxygen_content"
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/dialog_bg_blood_oxygen"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/heart_rate_content">
+
+            <ImageView
+                android:id="@+id/icon_blood_oxygen"
+                android:layout_width="90dp"
+                android:layout_height="90dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginStart="10dp"
+                android:src="@drawable/dialog_blood_oxygen_icon" />
+
+            <TextView
+                android:id="@+id/title_blood_oxygen"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_toEndOf="@id/icon_blood_oxygen"
+                android:fontFamily="@font/gobold"
+                android:text="saturasi oksigen (SpO2)"
+                android:textColor="@color/black"
+                android:textSize="24sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/title_blood_oxygen"
+                android:layout_alignParentBottom="true"
+                android:layout_marginTop="3dp"
+                android:layout_toEndOf="@id/icon_blood_oxygen"
+                android:fontFamily="@font/gobold"
+                android:text="00°C"
+                android:textAlignment="textStart"
+                android:textColor="@color/black"
+                android:textSize="38sp" />
+
+        </RelativeLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</LinearLayout>

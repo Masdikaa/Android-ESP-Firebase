@@ -1,19 +1,27 @@
 package com.masdika.espandroidfirebase
 
 import android.os.Bundle
+import android.util.Log
+import android.view.View
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.fragment.app.FragmentManager
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.masdika.espandroidfirebase.databinding.ActivityMainBinding
+import nl.joery.animatedbottombar.AnimatedBottomBar
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var database: DatabaseReference
+    private lateinit var dialog: BottomSheetDialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,6 +56,61 @@ class MainActivity : AppCompatActivity() {
                 // Handle error
             }
         })
+
+
+        binding.bottomBar.setOnTabSelectListener(object : AnimatedBottomBar.OnTabSelectListener {
+            override fun onTabSelected(
+                lastIndex: Int,
+                lastTab: AnimatedBottomBar.Tab?,
+                newIndex: Int,
+                newTab: AnimatedBottomBar.Tab
+            ) {
+                Log.d("Bottom_Bar", "Selected index: $newIndex, title: ${newTab.title}")
+                when (newTab.id) {
+                    R.id.tab_profile -> {
+                        binding.mapView.visibility = View.VISIBLE
+
+                        // remove Fragment History
+                        val fragmentManager: FragmentManager = supportFragmentManager
+                        val fragment = fragmentManager.findFragmentById(R.id.frame_layout)
+                        fragment?.let {
+                            fragmentManager.beginTransaction().remove(it).commit()
+                            Log.d("Remove Fragment", "Fragment : $fragment")
+                        }
+                    }
+
+                    R.id.tab_history -> {
+                        // Disable mapview
+                        binding.mapView.visibility = View.GONE
+
+                        supportFragmentManager.beginTransaction()
+                            .replace(R.id.frame_layout, HistoryFragment()).commit()
+                    }
+
+                }
+            }
+        })
+
+        binding.openDialog.setOnClickListener {
+            showBottomSheet()
+        }
+
+    }
+
+    private fun showBottomSheet() {
+        dialog = BottomSheetDialog(this)
+        dialog = BottomSheetDialog(this, R.style.AppBottomSheetDialogTheme)
+
+        val view = layoutInflater.inflate(R.layout.bottom_sheet_dialog, null)
+        val btnClose = view.findViewById<ImageView>(R.id.close_button)
+
+        btnClose.setOnClickListener {
+            dialog.dismiss()
+        }
+
+        dialog.setCancelable(false)
+        dialog.setContentView(view)
+        dialog.show()
     }
 
 }

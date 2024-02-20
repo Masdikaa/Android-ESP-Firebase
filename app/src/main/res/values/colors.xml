@@ -8,4 +8,15 @@
     <color name="secondary">#03053D</color>
     <color name="gray">#F5F7F8</color>
     <color name="dark_gray">#222831</color>
+
+    <color name="pink_start">#FFB3C2</color>
+    <color name="pink_end">#FFE6EB</color>
+
+    <color name="mint_start">#66E8FF</color>
+    <color name="mint_end">#CCF7FF</color>
+
+    <color name="red_start">#FF4D61</color>
+    <color name="red_end">#FFB3BB</color>
+
+
 </resources>
