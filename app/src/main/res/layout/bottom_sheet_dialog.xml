@@ -90,6 +90,7 @@
                 android:textSize="24sp" />
 
             <TextView
+                android:id="@+id/tv_temperature"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/title_temperature"
@@ -137,6 +138,7 @@
                 android:textSize="24sp" />
 
             <TextView
+                android:id="@+id/tv_heart_rate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/title_heart_rate"
@@ -184,6 +186,7 @@
                 android:textSize="24sp" />
 
             <TextView
+                android:id="@+id/tv_blood_oxygen"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/title_blood_oxygen"

@@ -16,6 +16,7 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.masdika.espandroidfirebase.databinding.ActivityMainBinding
 import nl.joery.animatedbottombar.AnimatedBottomBar
+import kotlin.math.roundToInt
 
 class MainActivity : AppCompatActivity() {
 
@@ -103,10 +104,32 @@ class MainActivity : AppCompatActivity() {
 
         val view = layoutInflater.inflate(R.layout.bottom_sheet_dialog, null)
         val btnClose = view.findViewById<ImageView>(R.id.close_button)
+        val tvTemperature = view.findViewById<TextView>(R.id.tv_temperature)
+        val tvHearRate = view.findViewById<TextView>(R.id.tv_heart_rate)
+        val tvBloodOxygen = view.findViewById<TextView>(R.id.tv_blood_oxygen)
 
         btnClose.setOnClickListener {
             dialog.dismiss()
         }
+
+        database.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+
+                val objectTemp = snapshot.child("MLX90614").child("object_temp").getValue()
+                val heartRate = snapshot.child("MAX30100").child("heart_rate").getValue()
+                val bloodOxygen = snapshot.child("MAX30100").child("spo2").getValue()
+
+                tvTemperature.text = "${(objectTemp as Double).roundToInt()}°C"
+                tvHearRate.text = "${heartRate} bpm"
+                tvBloodOxygen.text = "${bloodOxygen}%"
+
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                // Handle error
+            }
+        })
+
 
         dialog.setCancelable(false)
         dialog.setContentView(view)
