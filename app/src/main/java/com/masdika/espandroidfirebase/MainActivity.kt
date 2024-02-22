@@ -24,7 +24,11 @@ import org.osmdroid.events.MapListener
 import org.osmdroid.events.ScrollEvent
 import org.osmdroid.events.ZoomEvent
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory
+import org.osmdroid.util.GeoPoint
 import org.osmdroid.views.MapView
+import org.osmdroid.views.overlay.ItemizedIconOverlay
+import org.osmdroid.views.overlay.OverlayItem
+import org.osmdroid.views.overlay.ScaleBarOverlay
 import org.osmdroid.views.overlay.mylocation.GpsMyLocationProvider
 import org.osmdroid.views.overlay.mylocation.MyLocationNewOverlay
 import kotlin.math.roundToInt
@@ -39,6 +43,8 @@ class MainActivity : AppCompatActivity(), MapListener, GpsStatus.Listener {
     lateinit var controller: IMapController
     lateinit var mMyLocationOverlay: MyLocationNewOverlay
 
+    private var anotherOverlayItemArray: ArrayList<OverlayItem> = ArrayList()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -50,6 +56,8 @@ class MainActivity : AppCompatActivity(), MapListener, GpsStatus.Listener {
             applicationContext,
             getSharedPreferences(getString(R.string.app_name), MODE_PRIVATE)
         )
+
+        // SetViewMap
         mMap = binding.mapview
         mMap.setTileSource(TileSourceFactory.MAPNIK)
         mMap.mapCenter
@@ -57,6 +65,7 @@ class MainActivity : AppCompatActivity(), MapListener, GpsStatus.Listener {
         mMap.getLocalVisibleRect(Rect())
         mMap.setBuiltInZoomControls(false)
 
+        // Define My Location overlay
         mMyLocationOverlay = MyLocationNewOverlay(GpsMyLocationProvider(this), mMap)
         controller = mMap.controller
 
@@ -70,10 +79,18 @@ class MainActivity : AppCompatActivity(), MapListener, GpsStatus.Listener {
             }
         }
 
+        // Define User Location Overlay
+        anotherOverlayItemArray.add(OverlayItem("User", "User", GeoPoint(-7.640658, 111.517252)))
+
+        val anotherItemizedIconOverlay =
+            ItemizedIconOverlay<OverlayItem>(this, anotherOverlayItemArray, null)
+        mMap.overlays.add(anotherItemizedIconOverlay)
+
         controller.setZoom(13.0)
 
         mMap.overlays.add(mMyLocationOverlay)
-
+        val myScaleBarOverlay = ScaleBarOverlay(mMap)
+        mMap.overlays.add(myScaleBarOverlay)
         mMap.addMapListener(this)
         //END MAP+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
