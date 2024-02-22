@@ -1,4 +1,4 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <!-- Base application theme. -->
     <style name="Base.Theme.ESPAndroidFirebase" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
@@ -11,7 +11,7 @@
         <item name="colorSecondaryVariant">@color/secondary</item>
         <item name="colorOnSecondary">@color/secondary</item>
 
-        <item name="android:statusBarColor">@color/dark_gray</item>
+        <item name="android:statusBarColor">@color/primary</item>
 
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
     </style>

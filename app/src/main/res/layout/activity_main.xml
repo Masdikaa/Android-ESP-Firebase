@@ -10,7 +10,7 @@
         android:id="@+id/top_border"
         android:layout_width="0dp"
         android:layout_height="5dp"
-        android:background="@color/dark_gray"
+        android:background="@color/primary"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

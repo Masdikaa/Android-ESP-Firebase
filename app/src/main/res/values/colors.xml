@@ -5,6 +5,7 @@
 
     <!--Pallete-->
     <color name="primary">#00A9FF</color>
+    <color name="status_bar_color">#006699</color>
     <color name="secondary">#03053D</color>
     <color name="gray">#F5F7F8</color>
     <color name="dark_gray">#222831</color>

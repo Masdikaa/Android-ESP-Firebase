@@ -30,34 +30,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
 
-        // Initialize Firebase Realtime Database
         database = FirebaseDatabase.getInstance().getReference()
-
-        // Add ValueEventListener to fetch data from Firebase
-        database.addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-
-                val ambientTemp = snapshot.child("MLX90614").child("ambient_temp").getValue()
-                val objectTemp = snapshot.child("MLX90614").child("object_temp").getValue()
-                val gpsLat = snapshot.child("GPS").child("latitude").getValue()
-                val gpsLng = snapshot.child("GPS").child("longitude").getValue()
-                val heartRate = snapshot.child("MAX30100").child("heart_rate").getValue()
-                val spo2 = snapshot.child("MAX30100").child("spo2").getValue()
-
-//                binding.tvAmbientTemp.text = "Ambient Temperature : ${String.format("%.2f", ambientTemp)}°C"
-//                binding.tvObjectTemp.text = "Object Temperature : ${String.format("%.2f", objectTemp)}°C"
-//                binding.tvLatitude.text = "Latitude : ${gpsLat.toString()}"
-//                binding.tvLongitude.text = "Long : ${gpsLng.toString()}"
-//                binding.tvHeartrate.text = "Heart Rate : ${heartRate.toString()} BPM"
-//                binding.tvBloodO2.text = "Blood O2 : ${spo2.toString()}%"
-
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-                // Handle error
-            }
-        })
-
 
         binding.bottomBar.setOnTabSelectListener(object : AnimatedBottomBar.OnTabSelectListener {
             override fun onTabSelected(
@@ -70,8 +43,7 @@ class MainActivity : AppCompatActivity() {
                 when (newTab.id) {
                     R.id.tab_profile -> {
                         binding.mapView.visibility = View.VISIBLE
-
-                        // remove Fragment History
+                        binding.openDialog.visibility = View.VISIBLE
                         val fragmentManager: FragmentManager = supportFragmentManager
                         val fragment = fragmentManager.findFragmentById(R.id.frame_layout)
                         fragment?.let {
@@ -81,9 +53,8 @@ class MainActivity : AppCompatActivity() {
                     }
 
                     R.id.tab_history -> {
-                        // Disable mapview
                         binding.mapView.visibility = View.GONE
-
+                        binding.openDialog.visibility = View.GONE
                         supportFragmentManager.beginTransaction()
                             .replace(R.id.frame_layout, HistoryFragment()).commit()
                     }
@@ -105,12 +76,25 @@ class MainActivity : AppCompatActivity() {
         val view = layoutInflater.inflate(R.layout.bottom_sheet_dialog, null)
         val btnClose = view.findViewById<ImageView>(R.id.close_button)
         val tvTemperature = view.findViewById<TextView>(R.id.tv_temperature)
-        val tvHearRate = view.findViewById<TextView>(R.id.tv_heart_rate)
+        val tvHeartRate = view.findViewById<TextView>(R.id.tv_heart_rate)
         val tvBloodOxygen = view.findViewById<TextView>(R.id.tv_blood_oxygen)
 
         btnClose.setOnClickListener {
             dialog.dismiss()
         }
+
+        updateBodyCondition(tvTemperature, tvHeartRate, tvBloodOxygen)
+
+        dialog.setCancelable(false)
+        dialog.setContentView(view)
+        dialog.show()
+    }
+
+    private fun updateBodyCondition(
+        tvTemperature: TextView,
+        tvHeartRate: TextView,
+        tvBloodOxygen: TextView
+    ) {
 
         database.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -120,7 +104,7 @@ class MainActivity : AppCompatActivity() {
                 val bloodOxygen = snapshot.child("MAX30100").child("spo2").getValue()
 
                 tvTemperature.text = "${(objectTemp as Double).roundToInt()}°C"
-                tvHearRate.text = "${heartRate} bpm"
+                tvHeartRate.text = "${heartRate} bpm"
                 tvBloodOxygen.text = "${bloodOxygen}%"
 
             }
@@ -130,10 +114,21 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
+    }
 
-        dialog.setCancelable(false)
-        dialog.setContentView(view)
-        dialog.show()
+    private fun updateGeoLocation() {
+        database.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+
+                val gpsLat = snapshot.child("GPS").child("latitude").getValue()
+                val gpsLng = snapshot.child("GPS").child("longitude").getValue()
+
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                // Handle error
+            }
+        })
     }
 
 }
