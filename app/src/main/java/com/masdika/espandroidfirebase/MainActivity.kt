@@ -1,5 +1,7 @@
 package com.masdika.espandroidfirebase
 
+import android.graphics.Rect
+import android.location.GpsStatus
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -16,19 +18,64 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.masdika.espandroidfirebase.databinding.ActivityMainBinding
 import nl.joery.animatedbottombar.AnimatedBottomBar
+import org.osmdroid.api.IMapController
+import org.osmdroid.config.Configuration
+import org.osmdroid.events.MapListener
+import org.osmdroid.events.ScrollEvent
+import org.osmdroid.events.ZoomEvent
+import org.osmdroid.tileprovider.tilesource.TileSourceFactory
+import org.osmdroid.views.MapView
+import org.osmdroid.views.overlay.mylocation.GpsMyLocationProvider
+import org.osmdroid.views.overlay.mylocation.MyLocationNewOverlay
 import kotlin.math.roundToInt
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), MapListener, GpsStatus.Listener {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var database: DatabaseReference
     private lateinit var dialog: BottomSheetDialog
+
+    lateinit var mMap: MapView
+    lateinit var controller: IMapController
+    lateinit var mMyLocationOverlay: MyLocationNewOverlay
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+
+        //START MAP+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+        Configuration.getInstance().load(
+            applicationContext,
+            getSharedPreferences(getString(R.string.app_name), MODE_PRIVATE)
+        )
+        mMap = binding.mapview
+        mMap.setTileSource(TileSourceFactory.MAPNIK)
+        mMap.mapCenter
+        mMap.setMultiTouchControls(true)
+        mMap.getLocalVisibleRect(Rect())
+        mMap.setBuiltInZoomControls(false)
+
+        mMyLocationOverlay = MyLocationNewOverlay(GpsMyLocationProvider(this), mMap)
+        controller = mMap.controller
+
+        mMyLocationOverlay.enableMyLocation()
+        mMyLocationOverlay.enableFollowLocation()
+        mMyLocationOverlay.isDrawAccuracyEnabled = true
+        mMyLocationOverlay.runOnFirstFix {
+            runOnUiThread {
+                controller.setCenter(mMyLocationOverlay.myLocation)
+                controller.animateTo(mMyLocationOverlay.myLocation)
+            }
+        }
+
+        controller.setZoom(13.0)
+
+        mMap.overlays.add(mMyLocationOverlay)
+
+        mMap.addMapListener(this)
+        //END MAP+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
         database = FirebaseDatabase.getInstance().getReference()
 
@@ -42,7 +89,7 @@ class MainActivity : AppCompatActivity() {
                 Log.d("Bottom_Bar", "Selected index: $newIndex, title: ${newTab.title}")
                 when (newTab.id) {
                     R.id.tab_profile -> {
-                        binding.mapView.visibility = View.VISIBLE
+                        binding.mapview.visibility = View.VISIBLE
                         binding.openDialog.visibility = View.VISIBLE
                         val fragmentManager: FragmentManager = supportFragmentManager
                         val fragment = fragmentManager.findFragmentById(R.id.frame_layout)
@@ -53,7 +100,7 @@ class MainActivity : AppCompatActivity() {
                     }
 
                     R.id.tab_history -> {
-                        binding.mapView.visibility = View.GONE
+                        binding.mapview.visibility = View.GONE
                         binding.openDialog.visibility = View.GONE
                         supportFragmentManager.beginTransaction()
                             .replace(R.id.frame_layout, HistoryFragment()).commit()
@@ -129,6 +176,22 @@ class MainActivity : AppCompatActivity() {
                 // Handle error
             }
         })
+    }
+
+    override fun onScroll(event: ScrollEvent?): Boolean {
+        Log.e("TAG", "onCreate:la ${event?.source?.getMapCenter()?.latitude}")
+        Log.e("TAG", "onCreate:lo ${event?.source?.getMapCenter()?.longitude}")
+        return true
+    }
+
+    override fun onZoom(event: ZoomEvent?): Boolean {
+        Log.e("TAG", "onZoom zoom level: ${event?.zoomLevel}   source:  ${event?.source}")
+        return true
+    }
+
+    @Deprecated("Deprecated in Java")
+    override fun onGpsStatusChanged(p0: Int) {
+
     }
 
 }

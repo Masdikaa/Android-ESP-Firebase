@@ -25,21 +25,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/top_border" />
 
-    <com.mapbox.maps.MapView
-        android:id="@+id/mapView"
+    <org.osmdroid.views.MapView
+        android:id="@+id/mapview"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@id/bottom_bar_top"
+        app:layout_constraintBottom_toTopOf="@id/bottom_bar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/top_border"
-        app:mapbox_cameraBearing="0.0"
-        app:mapbox_cameraPitch="0.0"
-        app:mapbox_cameraTargetLat="-7.63978"
-        app:mapbox_cameraTargetLng="111.54435"
-        app:mapbox_cameraZoom="10"
-        app:mapbox_locationComponentEnabled="true"
-        app:mapbox_locationComponentPuckBearing="heading" />
+        app:layout_constraintTop_toBottomOf="@id/top_border" />
 
     <LinearLayout
         android:id="@+id/open_dialog"
