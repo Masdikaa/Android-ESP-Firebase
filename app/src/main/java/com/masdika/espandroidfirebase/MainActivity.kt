@@ -212,3 +212,13 @@ class MainActivity : AppCompatActivity(), MapListener, GpsStatus.Listener {
     }
 
 }
+
+//binding.openMap.setOnClickListener {
+//    val latitude = -7.868472
+//    val longitude = -248.527789
+//    val label = "Lokasi yang Dituju"
+//    val gmmIntentUri = Uri.parse("geo:$latitude,$longitude?q=$latitude,$longitude($label)")
+//    val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
+//    mapIntent.setPackage("com.google.android.apps.maps")
+//    startActivity(mapIntent)
+//}
