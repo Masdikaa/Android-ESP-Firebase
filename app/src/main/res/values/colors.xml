@@ -7,7 +7,9 @@
     <color name="primary">#00A9FF</color>
     <color name="status_bar_color">#006699</color>
     <color name="secondary">#03053D</color>
+
     <color name="gray">#F5F7F8</color>
+    <color name="semi_dark_gray">#D6D7D7</color>
     <color name="dark_gray">#222831</color>
 
     <color name="pink_start">#FFB3C2</color>
