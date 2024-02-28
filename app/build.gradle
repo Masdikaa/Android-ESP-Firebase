@@ -59,7 +59,7 @@ dependencies {
     // Animated Bottom Bar
     implementation 'nl.joery.animatedbottombar:library:1.1.0'
 
-    //Dropdown Spinner
-    implementation "com.github.skydoves:powerspinner:1.2.7"
+    //GIF View
+    implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.28'
 
 }
