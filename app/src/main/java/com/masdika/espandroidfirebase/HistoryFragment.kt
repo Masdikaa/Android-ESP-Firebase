@@ -68,9 +68,6 @@ class HistoryFragment : Fragment() {
 
         }
 
-        //historyRecyclerView.adapter = HistoryAdapter(historyArrayList)
-
     }
-
 
 }

@@ -10,8 +10,6 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.FragmentManager
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -126,7 +124,6 @@ class MainActivity : AppCompatActivity(), MapListener, GpsStatus.Listener {
                         supportFragmentManager.beginTransaction()
                             .replace(R.id.frame_layout, HistoryFragment()).commit()
                     }
-
                 }
             }
         })
@@ -134,7 +131,6 @@ class MainActivity : AppCompatActivity(), MapListener, GpsStatus.Listener {
         binding.openDialog.setOnClickListener {
             showBottomSheet()
         }
-
 
     }
 
