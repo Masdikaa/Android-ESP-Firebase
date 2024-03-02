@@ -1,20 +1,23 @@
-package com.masdika.espandroidfirebase
+package com.masdika.espandroidfirebase.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.get
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.masdika.espandroidfirebase.R
+import com.masdika.espandroidfirebase.adapters.HistoryAdapter
+import com.masdika.espandroidfirebase.data.HistoryDataClass
 import com.masdika.espandroidfirebase.databinding.FragmentHistoryBinding
-
-private var _binding: FragmentHistoryBinding? = null
-private val binding get() = _binding!!
 
 class HistoryFragment : Fragment() {
 
-    private lateinit var adapter: HistoryAdapter
+    private var _binding: FragmentHistoryBinding? = null
+    private val binding get() = _binding!!
+
     private lateinit var historyRecyclerView: RecyclerView
     private lateinit var historyArrayList: ArrayList<HistoryDataClass>
 
@@ -25,9 +28,10 @@ class HistoryFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentHistoryBinding.inflate(inflater, container, false)
         return binding.root
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

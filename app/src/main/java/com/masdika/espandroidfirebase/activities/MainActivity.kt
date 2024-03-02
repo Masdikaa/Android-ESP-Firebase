@@ -1,4 +1,4 @@
-package com.masdika.espandroidfirebase
+package com.masdika.espandroidfirebase.activities
 
 import android.graphics.Rect
 import android.location.GpsStatus
@@ -16,6 +16,8 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.masdika.espandroidfirebase.fragments.HistoryFragment
+import com.masdika.espandroidfirebase.R
 import com.masdika.espandroidfirebase.databinding.ActivityMainBinding
 import nl.joery.animatedbottombar.AnimatedBottomBar
 import org.osmdroid.api.IMapController
@@ -31,7 +33,6 @@ import org.osmdroid.views.overlay.OverlayItem
 import org.osmdroid.views.overlay.ScaleBarOverlay
 import org.osmdroid.views.overlay.mylocation.GpsMyLocationProvider
 import org.osmdroid.views.overlay.mylocation.MyLocationNewOverlay
-import kotlin.math.roundToInt
 
 class MainActivity : AppCompatActivity(), MapListener, GpsStatus.Listener {
 
@@ -170,7 +171,7 @@ class MainActivity : AppCompatActivity(), MapListener, GpsStatus.Listener {
                 val heartRate = snapshot.child("MAX30100").child("heart_rate").getValue()
                 val bloodOxygen = snapshot.child("MAX30100").child("spo2").getValue()
 
-                tvTemperature.text = "${(objectTemp as Double).roundToInt()}°C"
+                tvTemperature.text = "$objectTemp°C"
                 tvHeartRate.text = "${heartRate} bpm"
                 tvBloodOxygen.text = "${bloodOxygen}%"
 

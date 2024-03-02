@@ -1,10 +1,12 @@
-package com.masdika.espandroidfirebase
+package com.masdika.espandroidfirebase.adapters
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.masdika.espandroidfirebase.data.HistoryDataClass
+import com.masdika.espandroidfirebase.R
 
 class HistoryAdapter(private val historyList: ArrayList<HistoryDataClass>) :
     RecyclerView.Adapter<HistoryAdapter.HistoryViewHolder>() {
