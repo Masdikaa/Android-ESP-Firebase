@@ -35,20 +35,12 @@ class HistoryFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        dataInitialize()
-//
-//        historyRecyclerView = view.findViewById(R.id.recycleView)
-//        historyRecyclerView.layoutManager = LinearLayoutManager(context)
-//        historyRecyclerView.setHasFixedSize(true)
-//        historyRecyclerView.adapter = HistoryAdapter(historyArrayList)
 
-        dataInitialize() // Pastikan dataInitialize dipanggil terlebih dahulu
-
+        dataInitialize()
         historyRecyclerView = view.findViewById(R.id.recycleView)
         historyRecyclerView.layoutManager = LinearLayoutManager(context)
         historyRecyclerView.setHasFixedSize(true)
-        historyRecyclerView.adapter = HistoryAdapter(requireContext(), historyArrayList) // Berikan context dan historyArrayList
-
+        historyRecyclerView.adapter = HistoryAdapter(requireContext(), historyArrayList)
     }
 
     private fun dataInitialize() {

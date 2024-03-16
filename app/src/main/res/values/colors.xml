@@ -22,9 +22,8 @@
     <color name="red_end">#FFB3BB</color>
 
     <!--History Utility-->
-    <color name="normal">#99ddff</color>
-    <color name="normal_title_start">#0077b3</color>
-    <color name="hypothermia_indicated">#ffffb3</color>
-    <color name="emergency">#ff80b3</color>
+    <color name="normal">#CCFFCC</color>
+    <color name="hypothermia_indicated">#FFDF80</color>
+    <color name="emergency">#FF9999</color>
 
 </resources>

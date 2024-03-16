@@ -8,7 +8,6 @@ import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.masdika.espandroidfirebase.R
-import com.masdika.espandroidfirebase.R.id.main_layout
 import com.masdika.espandroidfirebase.data.HistoryDataClass
 
 class HistoryAdapter(
@@ -68,13 +67,12 @@ class HistoryAdapter(
         holder.geoPoint.text = currentItem.geoPoint
 
         // Mendapatkan referensi ke RelativeLayout.
-        val mainLayout = holder.itemView.findViewById<RelativeLayout>(main_layout)
+        val mainLayout = holder.itemView.findViewById<RelativeLayout>(R.id.main_layout)
 
         // Mendapatkan warna background berdasarkan status item.
         val newColor = when (currentItem.status) {
             "Emergency" -> appContext.resources.getColor(R.color.emergency)
             "Terindikasi Hipotermia" -> appContext.resources.getColor(R.color.hypothermia_indicated)
-            // "Normal" -> appContext.resources.getColor(R.color.normal)
             else -> appContext.resources.getColor(R.color.normal)
         }
 
