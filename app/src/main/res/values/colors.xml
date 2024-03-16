@@ -21,5 +21,10 @@
     <color name="red_start">#FF4D61</color>
     <color name="red_end">#FFB3BB</color>
 
+    <!--History Utility-->
+    <color name="normal">#99ddff</color>
+    <color name="normal_title_start">#0077b3</color>
+    <color name="hypothermia_indicated">#ffffb3</color>
+    <color name="emergency">#ff80b3</color>
 
 </resources>

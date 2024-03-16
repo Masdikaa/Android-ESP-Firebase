@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.get
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -36,12 +35,19 @@ class HistoryFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        dataInitialize()
+//        dataInitialize()
+//
+//        historyRecyclerView = view.findViewById(R.id.recycleView)
+//        historyRecyclerView.layoutManager = LinearLayoutManager(context)
+//        historyRecyclerView.setHasFixedSize(true)
+//        historyRecyclerView.adapter = HistoryAdapter(historyArrayList)
+
+        dataInitialize() // Pastikan dataInitialize dipanggil terlebih dahulu
 
         historyRecyclerView = view.findViewById(R.id.recycleView)
         historyRecyclerView.layoutManager = LinearLayoutManager(context)
         historyRecyclerView.setHasFixedSize(true)
-        historyRecyclerView.adapter = HistoryAdapter(historyArrayList)
+        historyRecyclerView.adapter = HistoryAdapter(requireContext(), historyArrayList) // Berikan context dan historyArrayList
 
     }
 
@@ -50,7 +56,7 @@ class HistoryFragment : Fragment() {
 
         statusId = arrayOf(
             "Normal",
-            "Medium Hypothermia",
+            "Terindikasi Hipotermia",
             "Emergency"
         )
 
