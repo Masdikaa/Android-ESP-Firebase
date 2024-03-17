@@ -26,6 +26,16 @@
             android:textSize="20sp"
             android:textStyle="bold" />
 
+        <ImageView
+            android:id="@+id/pop_menu_icon"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginEnd="18dp"
+            android:src="@drawable/menu_dot_icon"
+            android:scaleType="fitCenter"
+            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true"/>
+
     </RelativeLayout>
 
     <androidx.recyclerview.widget.RecyclerView

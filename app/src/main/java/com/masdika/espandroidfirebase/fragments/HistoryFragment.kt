@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.PopupMenu
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -20,6 +22,8 @@ class HistoryFragment : Fragment() {
     private lateinit var historyRecyclerView: RecyclerView
     private lateinit var historyArrayList: ArrayList<HistoryDataClass>
 
+    private lateinit var popupMenu: PopupMenu
+
     lateinit var statusId: Array<String>
     lateinit var dateTimeId: Array<String>
     lateinit var geoPointId: Array<String>
@@ -29,8 +33,23 @@ class HistoryFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentHistoryBinding.inflate(inflater, container, false)
-        return binding.root
 
+        popupMenu = PopupMenu(requireContext(), binding.popMenuIcon)
+        popupMenu.inflate(R.menu.popup_menu)
+        popupMenu.setOnMenuItemClickListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.hapus_riwayat -> {
+                    Toast.makeText(context, "clicked", Toast.LENGTH_SHORT).show()
+                }
+            }
+            true
+        }
+
+        binding.popMenuIcon.setOnClickListener{
+            popupMenu.show()
+        }
+
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
